@@ -14,6 +14,13 @@ MODEL_FILES = {
     "Logistic Regression": str(BASE_DIR / "models" / "logistic_regression.joblib"),
 }
 
+# 모델별 한 줄 안내
+MODEL_HINTS = {
+    "Logistic Regression": "해석이 쉬운 기준 모델입니다. 비교용으로 적합합니다.",
+    "Random Forest": "비선형 관계를 반영해 안정적인 예측을 제공하는 모델입니다.",
+    "XGBoost": "복잡한 패턴을 학습해 예측 성능이 좋은 편이지만 해석은 상대적으로 어렵습니다.",
+}
+
 METRICS_PATH = str(BASE_DIR / "metrics.json")
 DATA_PATH = str(BASE_DIR / "data" / "BankChurners.csv")
 
@@ -115,6 +122,9 @@ model_label = st.selectbox(
     list(MODEL_FILES.keys()),
     index=list(MODEL_FILES.keys()).index(default_label)
 )
+
+# 선택한 모델의 장단점(요약) 표시
+st.caption(f"선택 모델 안내: {MODEL_HINTS.get(model_label, '')}")
 
 st.subheader("고객 정보 입력")
 st.caption("고급 입력을 열지 않으면 나머지 변수는 학습 데이터의 기준값(중앙값/최빈값)으로 자동 보정됩니다.")
@@ -289,11 +299,17 @@ if run_compare:
         results.append(run_inference_for_model(lbl, user_input, metrics))
 
     df = pd.DataFrame(results)
+
+    # 비교표에서 모델 특징도 같이 보이도록 추가
+    df["설명"] = df["모델"].map(lambda m: MODEL_HINTS.get(m, ""))
+
     df["이탈확률"] = df["이탈확률"].map(lambda x: round(x, 3))
     df["threshold"] = df["threshold"].map(lambda x: round(x, 3))
     df = df.sort_values(by="이탈확률", ascending=False).reset_index(drop=True)
 
     st.dataframe(df, use_container_width=True)
-    st.caption("※ 본 기능은 모델 선택에 따른 의사결정 결과 차이를 확인하기 위한 비교 기능입니다.")
+    st.caption("※ 모델별 결과 차이는 모델 구조/학습 방식 차이로 인해 발생할 수 있으며, 본 비교는 의사결정을 돕기 위한 참고용입니다.")
+
+
 
 
