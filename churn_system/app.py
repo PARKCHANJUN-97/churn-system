@@ -2,16 +2,20 @@ import json, joblib
 import pandas as pd
 import streamlit as st
 
+from pathlib import Path
 from utils.features import add_derived_features, build_X, build_single_input_row
 from utils.decision import decide
 
+BASE_DIR = Path(__file__).resolve().parent
+
 MODEL_FILES = {
-    "XGBoost": "models/xgboost.joblib",
-    "Random Forest": "models/random_forest.joblib",
-    "Logistic Regression": "models/logistic_regression.joblib",
+    "XGBoost": str(BASE_DIR / "models" / "xgboost.joblib"),
+    "Random Forest": str(BASE_DIR / "models" / "random_forest.joblib"),
+    "Logistic Regression": str(BASE_DIR / "models" / "logistic_regression.joblib"),
 }
-METRICS_PATH = "metrics.json"
-DATA_PATH = "data/BankChurners.csv"
+
+METRICS_PATH = str(BASE_DIR / "metrics.json")
+DATA_PATH = str(BASE_DIR / "data" / "BankChurners.csv")
 
 
 # --------------------------
@@ -291,3 +295,4 @@ if run_compare:
 
     st.dataframe(df, use_container_width=True)
     st.caption("※ 본 기능은 모델 선택에 따른 의사결정 결과 차이를 확인하기 위한 비교 기능입니다.")
+
