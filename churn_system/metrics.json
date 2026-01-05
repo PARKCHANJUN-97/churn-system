@@ -1,0 +1,79 @@
+{
+  "data": {
+    "path": "data/BankChurners.csv",
+    "rows": 10127,
+    "filter_card_category": false
+  },
+  "feature_columns": [
+    "Customer_Age",
+    "Total_Relationship_Count",
+    "Credit_Limit",
+    "Total_Ct_Chng_Q4_Q1",
+    "Total_Revolving_Bal",
+    "Total_Amt_Chng_Q4_Q1",
+    "Avg_Utilization_Ratio",
+    "Avg_Trans_Amt",
+    "Monthly_Trans_Amt",
+    "Monthly_Trans_Ct",
+    "Gender_M"
+  ],
+  "models": {
+    "logistic_regression": {
+      "threshold": 0.33720435605323285,
+      "roc_auc": 0.892564554786777,
+      "accuracy": 0.9007897334649556,
+      "precision": 0.7094594594594594,
+      "recall": 0.6461538461538462,
+      "f1": 0.6763285024154589,
+      "confusion_matrix": [
+        [
+          1615,
+          86
+        ],
+        [
+          115,
+          210
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n           0       0.93      0.95      0.94      1701\n           1       0.71      0.65      0.68       325\n\n    accuracy                           0.90      2026\n   macro avg       0.82      0.80      0.81      2026\nweighted avg       0.90      0.90      0.90      2026\n"
+    },
+    "random_forest": {
+      "threshold": 0.3433333333333333,
+      "roc_auc": 0.960237869126758,
+      "accuracy": 0.9313919052319842,
+      "precision": 0.7852760736196319,
+      "recall": 0.7876923076923077,
+      "f1": 0.7864823348694316,
+      "confusion_matrix": [
+        [
+          1631,
+          70
+        ],
+        [
+          69,
+          256
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n           0       0.96      0.96      0.96      1701\n           1       0.79      0.79      0.79       325\n\n    accuracy                           0.93      2026\n   macro avg       0.87      0.87      0.87      2026\nweighted avg       0.93      0.93      0.93      2026\n"
+    },
+    "xgboost": {
+      "threshold": 0.3897447884082794,
+      "roc_auc": 0.9690372179261068,
+      "accuracy": 0.9447186574531096,
+      "precision": 0.8585858585858586,
+      "recall": 0.7846153846153846,
+      "f1": 0.819935691318328,
+      "confusion_matrix": [
+        [
+          1659,
+          42
+        ],
+        [
+          70,
+          255
+        ]
+      ],
+      "classification_report": "              precision    recall  f1-score   support\n\n           0       0.96      0.98      0.97      1701\n           1       0.86      0.78      0.82       325\n\n    accuracy                           0.94      2026\n   macro avg       0.91      0.88      0.89      2026\nweighted avg       0.94      0.94      0.94      2026\n"
+    }
+  }
+}
