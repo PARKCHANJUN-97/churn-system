@@ -116,7 +116,7 @@ model_label = st.selectbox(
     index=list(MODEL_FILES.keys()).index(default_label)
 )
 
-st.subheader("고객 정보 입력 (의사결정 핵심 입력 변수 7개)")
+st.subheader("고객 정보 입력")
 st.caption("고급 입력을 열지 않으면 나머지 변수는 학습 데이터의 기준값(중앙값/최빈값)으로 자동 보정됩니다.")
 
 defaults = compute_defaults_from_data()
@@ -295,4 +295,5 @@ if run_compare:
 
     st.dataframe(df, use_container_width=True)
     st.caption("※ 본 기능은 모델 선택에 따른 의사결정 결과 차이를 확인하기 위한 비교 기능입니다.")
+
 
